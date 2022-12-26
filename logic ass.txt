@@ -1,0 +1,164 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Read in the data from ex1data1.txt
+data = pd.read_csv("ex1data1.txt", header=None)
+X = data.iloc[:,0]
+y = data.iloc[:,1]
+
+#Add a column of ones to X to represent the intercept term
+X = np.c_[np.ones(len(X)),X]
+
+#Initialize theta as a column vector of zeros
+theta = np.zeros((2,1))
+
+#Set the learning rate and number of iterations for gradient descent
+alpha = 0.01
+iterations = 1500
+
+#Define the cost function
+def cost_function(X, y, theta):
+m = len(y)
+J = (1/(2*m))*np.sum((X.dot(theta) - y)**2)
+return J
+
+#Initialize the cost
+J = cost_function(X, y, theta)
+print("Initial cost: ", J)
+
+#Define the gradient descent function
+def gradient_descent(X, y, theta, alpha, iterations):
+m = len(y)
+for i in range(iterations):
+theta = theta - (alpha/m)*(X.T.dot(X.dot(theta)-y))
+return theta
+
+#Run gradient descent
+theta = gradient_descent(X, y, theta, alpha, iterations)
+
+#Calculate the final cost
+J = cost_function(X, y, theta)
+print("Final cost: ", J)
+
+#Plot the data and the fitted line
+plt.scatter(data.iloc[:,0], data.iloc[:,1], marker='x', color='r')
+plt.plot(data.iloc[:,0], X.dot(theta))
+plt.xlabel("Population")
+plt.ylabel("Profit")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def gradient_descent(X, y, theta, alpha, iterations):
+m = len(y)
+cost_history = []
+for i in range(iterations):
+# Calculate the prediction error
+error = X.dot(theta) - y
+# Update theta using the gradient descent update formula
+theta = theta - (alpha/m)*(X.T.dot(error))
+# Calculate the cost for the current iteration
+cost = cost_function(X, y, theta)
+# Append the cost to the cost history list
+cost_history.append(cost)
+return theta, cost_history
+
+Run gradient descent
+theta, cost_history = gradient_descent(X, y, theta, alpha, iterations)
+
+Plot the cost history
+plt.plot(cost_history)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+Read in the data from ex1data2.txt
+data = pd.read_csv("ex1data2.txt", header=None)
+X = data.iloc[:,0:2]
+y = data.iloc[:,2]
+
+Normalize the features
+X = (X - X.mean())/X.std()
+
+Add a column of ones to X to represent the intercept term
+X = np.c_[np.ones(len(X)),X]
+
+Initialize theta as a column vector of zeros
+theta = np.zeros((3,1))
+
+Set the learning rate and number of iterations for gradient descent
+alpha = 0.01
+iterations = 1500
+
+Define the cost function
+def cost_function(X, y, theta):
+m = len(y)
+J = (1/(2*m))*np.sum((X.dot(theta) - y)**2)
+return J
+
+Initialize the cost
+J = cost_function(X, y, theta)
+print("Initial cost: ", J)
+
+Define the gradient descent function
+def gradient_descent(X, y, theta, alpha, iterations):
+m = len(y)
+cost_history = []
+for i in range(iterations):
+# Calculate the prediction error
+error = X.dot(theta) - y
+# Update theta using the gradient descent update formula
+theta = theta - (alpha/m)*(X.T.dot(error))
+# Calculate the cost for the current iteration
+cost = cost_function(X, y, theta)
+# Append the cost to the cost history list
+cost_history.append(cost)
+return theta, cost_history
+
+Run gradient descent
+theta, cost_history = gradient_descent(X, y, theta, alpha, iterations)
+
+Calculate the final cost
+J = cost_function(X, y, theta)
+print("Final cost: ", J)
+
+Plot the cost history
+plt.plot(cost_history)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
+plt.show()
