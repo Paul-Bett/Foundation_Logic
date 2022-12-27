@@ -1,3 +1,1 @@
-# Foundation_Logic
-# Foundation_Logic
-# Foundation_Logic
+Programming Exercise 1: Linear Regression
