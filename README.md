@@ -1,4 +1,9 @@
 # Welcome to Self-Study C Programming Language Repository!
+# Welcome to Self-Study C Programming Language Repository!
+
+**Language:** C
+**Difficulty:** Beginner
+**License:** MIT
 
 Language: C
 Difficulty: Beginner
